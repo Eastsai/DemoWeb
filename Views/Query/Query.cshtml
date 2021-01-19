@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DemoWebDAO.DataModel.Cust>
+
+@{
+    ViewBag.Title = "";
+}
+
+<h3>查詢1</h3>
+<hr />
+<div>    
+    <form action="/Query/QueryList" method="post">
+        @*@Html.AntiForgeryToken()*@
+        <table>
+            <tr>
+                <td>編號</td>
+                <td>
+                    <input type="text" class="form-control" id="sno" name="sno" maxlength="8" />
+                </td>
+            </tr>
+            <tr>
+                <td>帳號</td>
+                <td><input type="text" class="form-control" id="cact" name="cact" maxlength="8" /></td>
+            </tr>
+            <tr>
+                <td>縣市</td>
+                <td>
+                    <select id="city" name="city" class="form-control"> 
+                        <option value="">請選擇</option>
+                        @foreach (var item in (IEnumerable<DemoWebDAO.DataModel.City>)ViewBag.City)
+                        {
+                            <option value=@item.CityName>@item.CityName</option>
+                        }
+                    </select>
+                </td>                
+            </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="1"><input type="submit" class="btn btn-primary" id="querycust" value="查詢" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@*Query查詢結果，Partial View*@
+<div id="QueryListDiv">          
+    @Html.Partial("_QueryList",Model)
+</div>

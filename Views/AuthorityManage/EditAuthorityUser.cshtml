@@ -1,0 +1,92 @@
+﻿@model DemoWeb.Models.AuthorityEdit
+
+@{ViewBag.Title = "EditAuthorityUser";}
+
+<h2>編輯使用者權限</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    <table border="1" class="table table-sm table-bordered">
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Sno)            
+                @Html.DisplayFor(m => m.CustData.Sno, new { @class = "form-control" })
+                <input type="hidden" id="Sno" value="@Model.CustData.Sno" />
+            </td>        
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Name)
+            @Html.DisplayFor(m => m.CustData.Name, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="UserAuthData"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span><input type="button" class="btn btn-primary" id="EditAuthData" onclick="UpdateAuth()" value="送出" /></span>
+                <span><input type="button" class="btn btn-primary" value="返回" onclick="window.location.href='/AuthorityManage/AuthorityManage'" /></span>
+            </td>
+        </tr>
+    </table>
+}
+
+
+<script>
+    $().ready(function () {
+        BuildTreeView();
+    })
+
+    //use plugs : flex-tree
+    function BuildTreeView() {           
+        var datas = @Html.Raw(Model.FuncTreeView);
+        $('#UserAuthData').flexTree({
+            id:"userdata",
+            items: datas,            
+            type: 'checkbox'
+        });
+    }
+
+    function UpdateAuth() {
+        var treeview = GetCurrentTreeView()
+        $.ajax({
+            url: "/AuthorityManage/UpdateAuthorityUser",
+            type: "post",
+            data: treeview,
+            datatype: "json",
+            contentType: "application/json",
+            success: function (result) {               
+                if(result == "OK")
+                    alert('新增成功')
+                else
+                    alert('新增失敗')
+            }, error: function () {
+                alert('新增失敗');
+            }
+        })
+    }
+
+    function GetCurrentTreeView() {
+        //get treeview 
+        var treeobj = $('#userdata input')
+
+        // convert to object array : {FuncID,checked}
+        var result = []; 
+        for (var i = 0; i < treeobj.length; i++) {
+            var tmp = new Object();
+            tmp.FuncID = treeobj[i].value
+            tmp.Checked = treeobj[i].checked
+            result.push(tmp)
+        }
+
+        var datas = {
+            UserSno: $('#Sno').val(),            
+            FuncData : result
+        };
+
+        var jsondata = JSON.stringify(datas);     
+        return jsondata;
+    }
+</script>
+

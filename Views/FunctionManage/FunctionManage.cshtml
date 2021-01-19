@@ -1,0 +1,67 @@
+﻿@model DemoWeb.Models.FunctionManage
+
+@{ViewBag.Title = "";}
+
+<h2>功能管理</h2>
+<hr />
+
+@using (Html.BeginForm("InsertFunction", "FunctionManage",FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.FuncID)</td>
+            <td>@Html.TextBoxFor(m => m.Function.FuncID, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.FuncName)</td>
+            <td>@Html.TextBoxFor(m => m.Function.FuncName, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.FuncLevel)</td>
+            <td>@Html.DropDownListFor(m => m.Function.FuncLevel, @Model.FuncLevel, new { @class = "form-control", id= "funclev" , onchange="FuncLevelCtrl()" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.FuncRoot)</td>
+            <td>@Html.DropDownListFor(m => m.Function.FuncRoot, @Model.FuncRoot, new { @class = "form-control" , id = "funcroot" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.FuncUrl)</td>
+            <td>@Html.TextBoxFor(m => m.Function.FuncUrl, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.Status)</td>
+            <td>@Html.DropDownListFor(m => m.Function.Status, @Model.Status, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Function.OrderSeq)</td>
+            <td>@Html.TextBoxFor(m => m.Function.OrderSeq, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn btn-primary" value="新增" /></td>
+        </tr>
+    </table>
+
+}
+    
+<div>
+    <input type="hidden" id="result" value="@Model.Message"/>
+</div>
+
+<script>
+    var r = $('#result').val() 
+    if(r != "NORESULT"){
+        alert(r)
+    }
+
+    function FuncLevelCtrl() {
+        var funclev = $('#funclev').val()
+        var froot = $('#funcroot')        
+        if (funclev == "1") {            
+            froot.attr("selected", "selected").val("")
+            froot.attr("disabled", "disabled")
+        } else {
+            froot.removeAttr("disabled")            
+        }
+    }   
+</script>
+

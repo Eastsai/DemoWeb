@@ -1,0 +1,15 @@
+﻿@using DemoWeb.Models
+
+@{ LoginInfo userdata = Session["UserData"] as LoginInfo;}
+
+<div class="divlev221">
+    
+    @if (userdata.SubMenu != null)
+    {
+        foreach (var item in userdata.SubMenu)
+        {
+            <a href="@item.FuncUrl" class="navbar-brand">@item.FuncName</a>
+        }
+    }
+    
+</div>

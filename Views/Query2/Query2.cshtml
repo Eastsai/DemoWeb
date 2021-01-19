@@ -1,0 +1,35 @@
+﻿
+@{ViewBag.Title = "";}
+<script src="~/Scripts/Query2/Query2.js"></script>
+<h3>查詢2</h3>
+<hr />
+@using (Html.BeginForm())
+{    
+    <div>
+        <table>
+            <tr>                
+                <td>@Html.Label("編號")</td>
+                <td>@Html.TextBox("Sno","", new {@class="form-control"})</td>
+            </tr>
+            <tr>                
+                <td>@Html.Label("帳號")</td>
+                <td>@Html.TextBox("Account","",new { @class="form-control"})</td>
+            </tr>
+            <tr>                
+                <td>@Html.Label("縣市")</td>
+                <td>@Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.City,"請選擇", new { @class = "form-control" })</td>                                
+            </tr>
+            <tr>
+                <td><input type="button" class="btn btn-primary" id="queryBtn" value="查詢"/></td>
+                <td><input type="button" class="btn btn-primary" id="insertBtn" value="新增" onclick="window.location.href='/Query2/InsertCust'" /></td>
+            </tr>                            
+        </table>
+    </div>
+}
+
+<div id="_Query2ListDiv" hidden="hidden">
+    <hr />    
+    @Html.Partial("_Query2List")
+</div>
+
+

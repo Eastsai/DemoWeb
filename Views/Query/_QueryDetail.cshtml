@@ -1,0 +1,65 @@
+﻿@model DemoWebDAO.DataModel.Cust
+
+<h3>修改</h3>
+<hr />
+<form action="/Query/QueryEdit" method="post">
+    <table>
+        <tr>
+            <td>編號</td>
+            <td><input type="text" class="form-control" name="csno" value="@Model.Sno" readonly="readonly" /></td>            
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td><input type="text" class="form-control" name="cname" value="@Model.Name" maxlength="20"/></td>
+        </tr>
+        <tr>
+            <td>年齡</td>
+            <td><input type="Text" class="form-control" name="cage" value="@Model.Age" max="99" min="0" /></td>            
+        </tr>
+        <tr>
+            <td>帳號</td>
+            <td><input type="text" class="form-control" name="cact" value="@Model.Account" maxlength="8"/></td>
+        </tr>
+        <tr>
+            <td>密碼</td>
+            <td><input type="text" class="form-control" name="cpsd" value="@Model.Password" maxlength="8" /></td>
+        </tr>
+        <tr>
+            <td>地址</td>
+            <td><input type="text" class="form-control" name="cadres" value="@Model.Address" maxlength="50"/></td>
+        </tr>
+        <tr>
+            <td>縣市</td>
+            <td><select name="city" class="form-control">                    
+                    @foreach (var item in (IEnumerable<DemoWebDAO.DataModel.City>)ViewBag.City) {
+                        <option value="@item.CityName">@item.CityName</option>
+                    }
+                </select></td>
+        </tr>
+        <tr>
+            <td>E-Mail</td>
+            <td><input type="email" class="form-control" name="cmail" value="@Model.Mail" maxlength="20"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn btn-primary" value="送出"/></td>
+            <td><input type="button" class="btn btn-primary" value="返回" onclick="window.location.href='/Query/Query'" />
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+@if (ViewBag.Result != "" || ViewBag.Result != null) {
+    <input id="result" value="@ViewBag.Result" hidden="hidden"/>
+    <script>
+        var r = document.getElementById("result").value
+        if (r == "" || r == null) {            
+        }else if (r == "OK") {
+            alert("修改成功");
+        }else{
+            alert("修改失敗");
+        }
+    </script>
+}
+
+

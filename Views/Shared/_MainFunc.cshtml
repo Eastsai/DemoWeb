@@ -1,0 +1,43 @@
+﻿@using DemoWeb.Models
+
+<div class="divlev211">
+
+@{
+    LoginInfo userdata = Session["UserData"] as LoginInfo;
+    if (userdata.MainMenu.FindIndex(x => x.FuncName == "資料處理") >= 0){
+
+        @Html.ActionLink("資料處理", "DataProcess", "Home", new { area = "" }, new { @class = "navbar-brand" });
+    }
+    else{
+        @Html.ActionLink("資料處理", "", "", new { area = "" }, new { @class = "navbar-brand disabled" })
+    }
+
+    if (userdata.MainMenu.FindIndex(x => x.FuncName == "系統管理") >= 0){
+        @Html.ActionLink("系統管理", "SystemManage", "Home", null, new { @class = "navbar-brand" });        
+    }
+    else{
+        @Html.ActionLink("系統管理", "", "", new { area = "" }, new { @class = "navbar-brand disabled" })
+    }
+
+    if (userdata.MainMenu.FindIndex(x => x.FuncName == "訊息管理") >= 0){
+        @Html.ActionLink("訊息管理", "InfromationManage", "Home", new { area = "" }, new { @class = "navbar-brand" });
+    }
+    else{
+        @Html.ActionLink("訊息管理", "", "", new { area = "" }, new { @class = "navbar-brand disabled" })
+    }     
+}
+
+
+</div>
+
+<div class="divlev212">
+    <lable class="navbar-brand">Hi，@userdata.UserName</lable>
+    @Html.ActionLink("登出", "Loguot", "Home", new { area = "" }, new { @class = "navbar-brand" })
+</div>      
+
+<style>
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+</style>

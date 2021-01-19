@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DemoWebDAO.DataModel.Cust>
+
+@if (Model != null)
+{
+    <hr />
+    <form>
+        <table class="table table-sm table-bordered table-hover">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Sno)</th>                
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.Account)</th>                
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.City)</th>
+                <th>@Html.DisplayNameFor(model => model.Mail)</th>
+                <th colspan="2">作業</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><label name="csno" value="@item.Sno">@item.Sno</label></td>
+                    <td><a href="/Query/QueryDetail?c=@item.Sno&city=@item.City">@item.Name</a></td>
+                    <td><label name="cage" value="@item.Age">@item.Age</label></td>
+                    <td><label name="cacunt" value="@item.Account">@item.Account</label></td>                    
+                    <td><label name="cadres" value="@item.Address">@item.Address</label></td>
+                    <td><label name="city" value="@item.City">@item.City</label></td>
+                    <td><label name="cmail" value="@item.Mail">@item.Mail</label></td>
+                    <td><a href="/Query/QueryDetail?c=@item.Sno&city=@item.City">修改</a></td>
+                    <td><a href="/Query/QueryDelete?c=@item.Sno">刪除</a></td>
+                </tr>
+            }
+        </table>
+    </form>
+}
+
+@if(ViewBag.Result != null && ViewBag.Result !=""){
+    <input id="result" value="@ViewBag.Result" hidden="hidden"/>
+    <script>
+        var r = document.getElementById("result").value
+        if (r == "" || r == null) {
+        } else if (r == "OK") {
+            alert("刪除成功")
+        } else {
+            alert("刪除失敗")
+        }
+    </script>
+}

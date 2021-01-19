@@ -1,0 +1,49 @@
+﻿@model DemoWebDAO.DataModel.Cust
+
+@{ViewBag.Title = "";}
+
+<script src="~/Scripts/Query2/Query2.js"></script>
+
+<div>
+    <h3>修改</h3>    
+    <hr />
+</div>
+
+@using (Html.BeginForm()){
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Sno)</td>
+            <td>@Html.TextBoxFor(m => m.Sno, new { @class = "form-control", @readonly = "readonly" })</td>      
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Name)</td>
+            <td>@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Age)</td>
+            <td>@Html.TextBoxFor(m => m.Age, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Account)</td>
+            <td>@Html.TextBoxFor(m => m.Account, new { @class = "form-control" })</td>
+        </tr>   
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Address)</td>
+            <td>@Html.TextBoxFor(m => m.Address, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.City) </td>
+            <td>@Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.City, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Mail)</td>
+            <td>@Html.TextBoxFor(m => m.Mail, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td><input type="button" id="editBtn" class="btn btn-primary" value="送出" /></td>
+            <td><input type="button" class="btn btn-primary" value="返回" onclick="window.location.href='/Query2/Query2'" /></td>
+        </tr>
+    </table>
+}
+
+@DemoWebHelper.Loading()

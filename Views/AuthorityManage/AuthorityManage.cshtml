@@ -1,0 +1,54 @@
+﻿@model DemoWeb.Models.AuthorityManage
+
+@{ViewBag.Title = "";}
+
+<h3>權限管理</h3>
+<hr />
+
+@using (Html.BeginForm("QueryAuthorityUser", "AuthorityManage"))
+{    
+    <div>
+        <table>    
+            <tr>             
+                <td>@Html.DisplayNameFor(m => m.Sno)</td>
+                <td>@Html.TextBoxFor(m => m.Sno, new { @class = "form-control" })</td>
+            </tr>
+            <tr>                
+                <td>@Html.DisplayNameFor(m => m.CityList)</td>                
+                <td>@Html.DropDownListFor(m => m.City, @Model.CityList,"請選擇", new { @class = "form-control" , id="t1" })</td>                
+            </tr>
+            <tr>
+                <td>                   
+                    <input type="submit" class="btn btn-primary" id="queryBtn" value="查詢" />
+                </td>               
+            </tr>
+        </table>
+    </div>
+}
+
+<input type="hidden" id="result" value="@Model.Result"/>
+
+@if (Model.CustData != null)
+{
+    <div id="_QueryUser">
+        @using (Html.BeginForm()){
+            <table class="table table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayName("編號")</td>
+                        <td>@Html.DisplayName("姓名")</td>
+                        <td>@Html.DisplayName("作業")</td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.CustData){
+                <tr>
+                    <td>@Html.DisplayFor(mi => item.Sno)</td>
+                    <td>@Html.DisplayFor(mi => item.Name)</td>                    
+                    <td>@Html.ActionLink("修改", "EditAuthorityUser", item)</td>
+                </tr>
+                }
+            </table>
+        }
+    </div>
+}
+

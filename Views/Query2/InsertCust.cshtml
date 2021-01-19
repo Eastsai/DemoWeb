@@ -1,0 +1,46 @@
+﻿@model DemoWeb.Models.InsertCust
+
+@{ ViewBag.Title = "";}
+
+<h3>新增</h3>
+<hr />
+@using (Html.BeginForm("InsertCust","Query2",FormMethod.Post)) {
+    <table>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Name)</td>            
+            <td>@Html.TextBoxFor(m => m.CustData.Name,new { @class="form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Age)</td>            
+            <td>@Html.TextBoxFor(m => m.CustData.Age , new { @class="form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Account)</td>            
+            <td>@Html.TextBoxFor(m => m.CustData.Account , new { @class="form-control" } )</td>
+        </tr>   
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.City)</td>            
+            <td>@Html.DropDownListFor(m => m.CustData.City, @Model.CityData, new { name="City", @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Address)</td>            
+            <td>@Html.TextBoxFor(m => m.CustData.Address , new { @class="form-control"})</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.CustData.Mail)</td>            
+            <td>@Html.TextBoxFor(m => m.CustData.Mail , new { @class="form-control" })</td>
+        </tr>
+        <tr>
+            <td><input type="submit" id="insrtBtn" class="btn btn-primary" value="送出"/></td>
+            <td><input type="button" class="btn btn-primary" value="返回" onclick="window.location.href='/Query2/Query2'"/></td>
+        </tr>
+    </table>
+}
+
+<input type="text" id="result" value="@Model.Message" hidden/>
+
+@if (@Model.Result != "NORESULT") {
+    <script>
+        alert($('#result').val())
+    </script>
+}
